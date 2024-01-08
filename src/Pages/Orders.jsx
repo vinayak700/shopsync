@@ -6,7 +6,6 @@ import { getUserOrderHistory, productSelector } from '../Redux/reducers/productR
 import { authSelector } from '../Redux/reducers/authReducer';
 
 const Orders = () => {
-    // const { userOrder, cartTotal, loading, getUserOrderHistory } = useProductValue();
     const { userOrder, loading } = useSelector(productSelector);
     const { currentUser } = useSelector(authSelector);
     const dispatch = useDispatch();
@@ -15,7 +14,7 @@ const Orders = () => {
 
     useEffect(() => {
         dispatch(getUserOrderHistory({ currentUser: currentUser.user }));
-    }, []);
+    }, [dispatch, currentUser.user]);
 
 
     const cartTotal = (userOrder) => {

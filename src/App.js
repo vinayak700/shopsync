@@ -1,20 +1,25 @@
-import React, { useEffect } from 'react';
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Route, Routes, BrowserRouter } from 'react-router-dom';
-import { Cart, ErrorPage, Home, Orders, SignIn, SignUp, ForgotPassword } from './Pages';
-import { MyNavbar } from './Components';
-// import { Provider } from 'react-redux';
-// import { store } from './Redux/store';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { useDispatch, useSelector } from 'react-redux';
-import { authActions, authSelector, setUser } from './Redux/reducers/authReducer';
-
+import React, { useEffect } from "react";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Route, Routes, BrowserRouter } from "react-router-dom";
+import {
+  Cart,
+  ErrorPage,
+  Home,
+  Orders,
+  SignIn,
+  SignUp,
+  ForgotPassword,
+} from "./Pages";
+import { MyNavbar } from "./Components";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import {
+  authActions,
+} from "./Redux/reducers/authReducer";
 
 const App = () => {
   const dispatch = useDispatch();
-  const { currentUser } = useSelector(authSelector);
-
   const auth = getAuth();
 
   useEffect(() => {
@@ -36,11 +41,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route
-          path="/"
-          element={<MyNavbar />}
-          errorElement={<ErrorPage />}
-        >
+        <Route path="/" element={<MyNavbar />} errorElement={<ErrorPage />}>
           <Route index element={<Home />} />
           <Route path="cart" element={<Cart />} />
           <Route path="orders" element={<Orders />} />
@@ -54,5 +55,3 @@ const App = () => {
 };
 
 export default App;
-
-

@@ -6,11 +6,38 @@ import {
 } from "../Redux/reducers/productReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { authSelector } from "../Redux/reducers/authReducer";
+import { toast } from "react-toastify";
 
 const ProductCard = (props) => {
   const { id, name, price, category, image } = props;
   const { currentUser } = useSelector(authSelector);
   const dispatch = useDispatch();
+
+  const handleAddToCart = (product) => {
+    if (!currentUser) {
+      toast.error("Please Login first!!!");
+      return;
+    }
+    console.log(product, currentUser);
+    dispatch(
+      addToUserCart({
+        product,
+        currentUser: currentUser.user,
+      })
+    );
+  };
+  const handleRemoveFromCart = (productId) => {
+    if (!currentUser) {
+      toast.error("Please Login first!!!");
+      return;
+    }
+    dispatch(
+      removeFromUserCart({
+        productId,
+        currentUser: currentUser.user,
+      })
+    );
+  };
 
   return (
     <Card style={{ width: "14rem", margin: "auto" }}>
@@ -31,12 +58,7 @@ const ProductCard = (props) => {
             size="sm"
             variant="secondary"
             onClick={() =>
-              dispatch(
-                addToUserCart({
-                  product: { id, name, price, category, image },
-                  currentUser: currentUser.user,
-                })
-              )
+              handleAddToCart({ id, name, price, category, image })
             }
           >
             Add To Cart
@@ -44,14 +66,7 @@ const ProductCard = (props) => {
           <Button
             size="sm"
             variant="danger"
-            onClick={() =>
-              dispatch(
-                removeFromUserCart({
-                  productId: id,
-                  currentUser: currentUser.user,
-                })
-              )
-            }
+            onClick={() => handleRemoveFromCart(id)}
           >
             Remove From Cart
           </Button>

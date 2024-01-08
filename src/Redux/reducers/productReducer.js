@@ -56,10 +56,6 @@ export const addToUserCart = createAsyncThunk(
     console.log(payload);
     const { product, currentUser } = payload;
     try {
-      if (!currentUser) {
-        toast.error("Please Login first!!!");
-        return;
-      }
       // Check if the Product is already in the cart
       const cartDocRef = doc(
         db,
@@ -139,9 +135,15 @@ export const removeFromUserCart = createAsyncThunk(
         `usersCarts/${currentUser.uid}/myCart`,
         productId
       );
-      await deleteDoc(cartDocRef);
-      toast.success("Product removed from the Cart successfully");
-      return;
+      const cartDocSnap = await getDoc(cartDocRef);
+      if (cartDocSnap.exists()) {
+        await deleteDoc(cartDocRef);
+        toast.success("Product removed from the Cart successfully");
+        return;
+      } else {
+        toast.error("Product not found in the Cart.");
+        return;
+      }
     } catch (error) {
       console.log(error);
       return thunkAPI.rejectWithValue({ error });

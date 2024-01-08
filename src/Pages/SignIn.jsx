@@ -16,7 +16,7 @@ const SignIn = () => {
 
   useEffect(() => {
     dispatch(setUser());
-  }, [])
+  }, [dispatch])
 
 
   const handleLogin = async (e) => {

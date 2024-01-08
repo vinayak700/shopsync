@@ -1,0 +1,44 @@
+BuyBusy - I
+BuyBusy is a web application for the customers of an e-commerce business.
+
+**Goal**
+Develop an E-Commerce that enables individuals to browse available items, add or remove them from their shopping cart, and complete the purchasing process.
+
+**Acceptance criteria**
+
+1. The React app must be integrated with Firebase for Create, Read, Update, and Delete (CRUD) functionality of products in the cart.
+2. The app must have the functionality to register new users and log in the existing users using Firebase Authentication.
+3. The app must implement routing using react-router-dom for different pages.
+4. The app must implement the useContext() hook at least once for managing user authentication or products.
+5. The app must implement proper state management and use React Hooks for handling user interactions and data updates.
+6. The code quality of the React app must be of a high standard, with proper documentation of code and functionality.
+7. There must be no cheating or copy-pasting of code from other sources, and all code must be original and developed specifically for this project.
+
+**Tasks**
+
+1. Create and initialize a new firestore for the BusyBuy app and include it inside the project.
+2. Create a register page that allows new users to register into your app.
+3. Create a login page that allows existing users to login into your app.
+4. Create a home page to display a list of products. The home page should include a feature to search products by name.
+5. Create a cart page to display the products that the user has added to the cart.
+6. Create a product card component that displays the image, title, price, and a button to add or remove that specific product from the cart. If the product is already in the cart, its quantity should be increased.
+7. The product card should only render the increase and decrease buttons if the product is on the cart page.
+8. Create an orders page to display the products the user has purchased and the order date.
+9. Additionally, you can add the following functionality to the project to maximize your score:
+10. Create a sidebar to filter the products based on product price and categories on the HomePage. The search and filter should be applied to the products simultaneously.
+11. Add conditional rendering to show the absence of data and loading state using the react-spinners library.
+12. Show toast messages for async actions and error conditions using the react-toastify library.
+
+**Hints**
+
+1. Use separate contexts to manage the user authentication state and product state. For example, the authentication state may have actions for handling login success, logout, setting the error message, etc.:
+2. For authentication using Firebase refer to this documnet : Link Create a function that can apply both search and filters at the same time. The function should have distinct logic for filtering based on category, price range, and search terms. The additional task of the BuyBusy app uses the following third-party components:
+- react-spinners: A simple React spinner library. It can display a circular loader when fetching data from the database. Learn more: link
+- react-toastify: Allows you to add notifications to your app with ease. It can display the status of network requests and other async actions as a toast. Learn more: link
+
+**API Structure**
+
+The firebase API would look like this:
+- /products to store the products
+- /usersCarts/<user_uid>/myCart to keep the cart products and their quantity.
+- /userOrders/<user_uid>/orders to hold users orders.
